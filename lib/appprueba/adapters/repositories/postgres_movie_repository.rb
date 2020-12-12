@@ -61,15 +61,4 @@ class PostgresMovieRepository
 
 end
 
-var = PostgresMovieRepository.new(Sequel.connect('postgres://tjhdlczk:FshcurA7e-KhR9dzEQhRbuUG5W2dhsj3@raja.db.elephantsql.com:5432/tjhdlczk'))
-dates = Set.new([Date.parse("2019-09-10"), Date.parse("2019-09-11"), Date.parse("2019-09-01"), Date.parse("2019-09-15")])
-movie = Movie.new("The lats numenorean",
-                  "this movie is about, Narsilion, the last of the men that came from the great sea : the folk father of men",
-                  "image",
-                  dates)
-# var.create(movie)
-# var.create(movie)
-# var.create(movie)
-# puts var.list(:query).group_by { |movie| movie[:movie_id] }.each { |k, v| puts "the key : #{k}, and the value : #{v}" }
-list = var.list(:query)
-puts list[0].dates
+
