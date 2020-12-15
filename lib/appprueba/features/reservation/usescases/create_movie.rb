@@ -1,4 +1,4 @@
-module CreateMovie
+class CreateMovie
 
   @movie_repository
 
@@ -7,6 +7,7 @@ module CreateMovie
   end
 
   def create(movie)
-    @movie_repository.create(movie)
+    movie_id = @movie_repository.create(movie)
+    @movie_repository.create_schedule(movie_id, movie.dates, 15)
   end
 end

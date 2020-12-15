@@ -1,2 +1,2 @@
-module Reserve
+module CreateReservation
 end
