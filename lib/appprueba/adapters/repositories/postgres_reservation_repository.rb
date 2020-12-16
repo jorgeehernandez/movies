@@ -1,43 +1,22 @@
-require '../../features/reservation/usescases/port/reservation_repository'
-require '../../features/reservation/domain/reservation'
+require_relative '../../features/reservation/usescases/port/reservation_repository'
+require_relative '../../features/reservation/domain/reservation'
 
 class PostgresReservationRepository
 
   include ReservationRepository
 
-  require 'sequel'
-  require 'pg'
+  @reservation_data_source
 
-  @db_client
-  @reservations_table
-
-  def initialize(db_client)
-    @db_client = db_client
-    unless @db_client.table_exists?(:reservations)
-      @db_client.create_table :reservations do
-        primary_key :id
-        foreign_key :movie_id, :movies
-        foreign_key :movie_date_id, :movies_dates
-        Date :date
-      end
-    end
-    @reservations_table = @db_client[:reservations]
+  def initialize(reservation_data_source)
+    @reservation_data_source = reservation_data_source
   end
 
-
   def create(reservation)
-    @reservations_table.insert(:movie_id => reservation.movie_id, :date => reservation.date)
+    @reservation_data_source.insert(reservation)
   end
 
   def list(query)
-    @reservations_table.all
+    @reservation_data_source.get(query)
   end
+
 end
-
-
-var = PostgresReservationRepository.new(Sequel.connect('postgres://tjhdlczk:FshcurA7e-KhR9dzEQhRbuUG5W2dhsj3@raja.db.elephantsql.com:5432/tjhdlczk'))
-reservation = Reservation.new(10, Date.today)
-puts var.create(reservation)
-
-# list = var.list(:query)
-# puts list[0].dates

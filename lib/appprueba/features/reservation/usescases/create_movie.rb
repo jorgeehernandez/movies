@@ -1,13 +1,17 @@
+
+
 class CreateMovie
 
   @movie_repository
+  @movie_schedule_repository
 
-  def initialize(movie_repository)
+  def initialize(movie_repository, movie_schedule_repository)
     @movie_repository = movie_repository
+    @movie_schedule_repository = movie_schedule_repository
   end
 
   def create(movie)
-    movie_id = @movie_repository.create(movie)
-    @movie_repository.create_schedule(movie_id, movie.dates, 10)
+    @movie_repository.create(movie)
+    @movie_schedule_repository.create(movie)
   end
 end
