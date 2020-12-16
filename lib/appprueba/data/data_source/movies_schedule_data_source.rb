@@ -16,6 +16,7 @@ class MoviesScheduleDataSource
         Date :date
         Integer :capacity
         unique [:movie_id, :date]
+        constraint(:capacity_min_value) { capacity > 0 }
       end
     end
 
@@ -28,4 +29,13 @@ class MoviesScheduleDataSource
       @movies_schedule_table.insert(:movie_id => movie.id, :date => date, :capacity => movie.capacity)
     end
   end
+
+  def update(persons)
+    begin
+      @movies_schedule_table.returning(:capacity).update(:capacity => (Sequel.expr(persons) - :capacity) * -1)
+    rescue  Sequel::Error => error
+      raise "Error for the check #{error}"
+    end
+  end
+
 end

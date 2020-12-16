@@ -13,4 +13,9 @@ class PostgresMovieScheduleRepository
   def create(movie)
     @movies_schedule_data_source.insert(movie)
   end
+
+  def update_capacity(persons)
+    @movies_schedule_data_source.update(persons)
+  end
+
 end

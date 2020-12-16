@@ -8,8 +8,8 @@ class ReservationDataSource
 
   def initialize(db_client)
     @db_client = db_client
-    unless @db_client.table_exists?(:reservation)
-      @db_client.create_table :reservation do
+    unless @db_client.table_exists?(:reservations)
+      @db_client.create_table :reservations do
         primary_key :id
         foreign_key :movie_id, :movies
         foreign_key :movie_date_id, :movies_schedule
@@ -17,7 +17,7 @@ class ReservationDataSource
         Integer :persons
       end
     end
-    @reservations_table = @db_client[:reservation]
+    @reservations_table = @db_client[:reservations]
   end
 
 
