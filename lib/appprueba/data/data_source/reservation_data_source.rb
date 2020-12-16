@@ -12,7 +12,6 @@ class ReservationDataSource
       @db_client.create_table :reservations do
         primary_key :id
         foreign_key :movie_id, :movies
-        foreign_key :movie_date_id, :movies_schedule
         Date :date
         Integer :persons
       end
@@ -20,13 +19,17 @@ class ReservationDataSource
     @reservations_table = @db_client[:reservations]
   end
 
-
   def insert(reservation)
     @reservations_table.insert(:movie_id => reservation.movie_id, :date => reservation.date, :persons => reservation.persons)
   end
 
-  def get(query)
+
+  def get_all
     @reservations_table.all
+  end
+
+  def get(date_from, date_to)
+    @reservations_table.where(date:  (date_from..date_to)).all
   end
 
 end

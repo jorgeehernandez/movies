@@ -1,14 +1,15 @@
-module MovieScheduleRepository
+module ReservationAPI
 
   def create(movie)
     raise "No implemented"
   end
 
-  def update_capacity(movie_schedule_id, persons)
+  def list(query)
     raise "No implemented"
   end
 
-  def find_by_reservation(reservation)
+  def list_query(date_from, date_to)
     raise "No implemented"
   end
+
 end

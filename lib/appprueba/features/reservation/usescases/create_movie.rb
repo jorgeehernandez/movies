@@ -13,5 +13,6 @@ class CreateMovie
   def create(movie)
     @movie_repository.create(movie)
     @movie_schedule_repository.create(movie)
+    movie
   end
 end

@@ -26,16 +26,21 @@ class MoviesScheduleDataSource
 
   def insert(movie)
     movie.dates.each do |date|
-      @movies_schedule_table.insert(:movie_id => movie.id, :date => date, :capacity => movie.capacity)
+      puts date
+      @movies_schedule_table.insert(:movie_id => movie.id, :date => date, :capacity => (movie.capacity/movie.dates.length()))
     end
   end
 
-  def update(persons)
+  def update(movie_schedule_id, persons)
     begin
-      @movies_schedule_table.returning(:capacity).update(:capacity => (Sequel.expr(persons) - :capacity) * -1)
-    rescue  Sequel::Error => error
+      @movies_schedule_table.returning.filter(:id => movie_schedule_id).update(:capacity => (Sequel.expr(persons) - :capacity) * -1)
+    rescue Sequel::Error => error
       raise "Error for the check #{error}"
     end
+  end
+
+  def get_by_movie_date(movie_id, date)
+    @movies_schedule_table.where(movie_id: movie_id, date: date).first
   end
 
 end

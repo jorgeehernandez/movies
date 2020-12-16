@@ -15,8 +15,12 @@ class PostgresReservationRepository
     @reservation_data_source.insert(reservation)
   end
 
-  def list(query)
-    @reservation_data_source.get(query)
+  def list
+    @reservation_data_source.get_all
+  end
+
+  def list_query(date_from, date_to)
+    @reservation_data_source.get(date_from, date_to)
   end
 
 end

@@ -9,11 +9,14 @@ class CreateReservation
   end
 
   def create(reservation)
-    # check if movie exist, movie has that date and movie has capacity free
-
-    @movie_schedule_repository.update_capacity(reservation.persons)
-    @reservation_repository.create(reservation)
+    movie_schedule = @movie_schedule_repository.find_by_reservation(reservation)
+    puts movie_schedule.to_s
+    if(movie_schedule.length > 0)
+      @movie_schedule_repository.update_capacity(movie_schedule[:id], reservation.persons)
+      @reservation_repository.create(reservation)
+    end
 
   end
+
 
 end
