@@ -15,7 +15,7 @@ class PostgresMovieScheduleRepository
   end
 
   def update_capacity(movie_schedule_id, persons)
-    @movies_schedule_data_source.update(persons)
+    @movies_schedule_data_source.update(movie_schedule_id, persons)
   end
 
   def find_by_reservation(reservation)

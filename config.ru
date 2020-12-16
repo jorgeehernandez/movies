@@ -1,5 +1,3 @@
-
-
-require_relative  '../../../../lib/appprueba'
+require_relative 'lib/app'
 
 run Application
