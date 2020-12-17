@@ -50,7 +50,7 @@ class Movie
       name: @name,
       description: @description,
       image_url: @name,
-      dates: @dates,
+      dates: @dates.to_a,
       capacity: @capacity,
     }
   end

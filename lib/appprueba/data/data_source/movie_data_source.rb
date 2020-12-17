@@ -1,4 +1,3 @@
-require_relative '../../features/reservation/domain/movie'
 
 class MovieDataSource
 
@@ -31,15 +30,7 @@ class MovieDataSource
   end
 
   def get(query)
-    movies = @movies_table.join(:movies_schedule, movie_id: :id).all.each_with_object({}) do |item, result|
-      puts item.to_s
-      if result[item[:movie_id]]
-        result[item[:movie_id]].dates << item[:date]
-      else
-        result[item[:movie_id]] = Movie.new(item[:movie_id], item[:name], item[:description], item[:image_ur], Set.new([item[:date]]), item[:capacity])
-      end
-    end
-    movies.values
+    @movies_table.join(:movies_schedule, movie_id: :id).all
   end
 
 end

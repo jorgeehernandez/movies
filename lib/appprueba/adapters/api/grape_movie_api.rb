@@ -27,7 +27,7 @@ module APIRoutes
     resource :movies do
       get do
         movie_list_usecase = MovieList.new(movie_repository)
-        json_movies = movie_list_usecase.list(:query).to_json
+        json_movies = movie_list_usecase.list(:query).map { |movie| movie.as_json(:options) }
         { movies: json_movies }
       end
 

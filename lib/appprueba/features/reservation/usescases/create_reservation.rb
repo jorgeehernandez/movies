@@ -15,7 +15,7 @@ class CreateReservation
       @movie_schedule_repository.update_capacity(movie_schedule[:id], reservation.persons)
       @reservation_repository.create(reservation)
     end
-
+    reservation
   end
 
 
