@@ -1,6 +1,6 @@
 # Tolkien Cimena
 
-This is a solution propuese for a simple Cinema Restful based system. It was created using clean architure. 
+This is a solution proposed for a simple Cinema Restful based system. It was created using clean architure :). 
 
 ![alt text](https://drive.google.com/uc?export=view&id=1VXUzDeVxCFvmVg4760FRneeURJWSStIU)
 
