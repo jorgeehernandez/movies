@@ -17,9 +17,9 @@ class PostgresMovieRepository
 
   def list(query)
     movies = @movies_data_source.get(query).each_with_object({}) do |item, result|
-      puts item.to_s
       if result[item[:movie_id]]
         result[item[:movie_id]].dates << item[:date]
+        result[item[:movie_id]].set_capacity(result[item[:movie_id]].capacity + item[:capacity])
       else
         result[item[:movie_id]] = Movie.new(item[:movie_id], item[:name], item[:description], item[:image_ur], Set.new([item[:date]]), item[:capacity])
       end

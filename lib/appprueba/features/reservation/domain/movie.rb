@@ -44,6 +44,10 @@ class Movie
     @capacity
   end
 
+  def set_capacity(capacity)
+    @capacity = capacity
+  end
+
   def as_json(options = {})
     {
       id: @id,
