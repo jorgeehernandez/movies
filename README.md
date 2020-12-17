@@ -1,44 +1,66 @@
-# Appprueba
+# Tolkien Cimena
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/appprueba`. To experiment with that code, run `bin/console` for an interactive prompt.
+This is a solution propuese for a simple Cinema Restful based system. It was created using clean architure. 
 
-TODO: Delete this and the text above, and describe your gem
+![alt text](https://drive.google.com/uc?export=view&id=1VXUzDeVxCFvmVg4760FRneeURJWSStIU)
 
-## Installation
+## To run
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'appprueba'
-```
-
-And then execute:
+In the root folder run:
 
     $ bundle install
 
-Or install it yourself as:
+And then execute:
 
-    $ gem install appprueba
+    $ bundle exec rackup
+
 
 ## Usage
 
-TODO: Write usage instructions here
 
-## Development
+Create movie
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+    curl --location --request POST 'http://localhost:9292/api/movies' \
+    --header 'Content-Type: application/json' \
+    --data-raw '{
+        "name" : "Galadriel",
+        "description" : "Galadriel : The neya ring bearer",
+        "image_url" : "this is a url",
+        "dates" : ["2019-09-10"]
+    }'
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+Get all movies
 
-## Contributing
+    curl --location --request GET 'http://localhost:9292/api/movies' \
+    --header 'Content-Type: application/json'
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/appprueba. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/appprueba/blob/master/CODE_OF_CONDUCT.md).
+Create  a reservation
 
+    curl --location --request POST 'http://localhost:9292/api/reservations/' \
+    --header 'Content-Type: application/json' \
+    --data-raw '{
+        "movie_id" : 1608162468,
+        "date" : "2019-10-10",
+        "persons" : 5
+    }'
+    
 
-## License
+Get all reservations
 
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+    curl --location --request GET 'http://localhost:9292/api/reservations/' \
+    --header 'Content-Type: application/json' 
+    
+Get reservations by dates 
 
-## Code of Conduct
+    curl --location --request GET 'http://localhost:9292/api/reservations/?date_from=2019-01-10&date_to=2021-12-10' \
+    --header 'Content-Type: application/json' \
+    --header 'Authorization: Basic ZWR3aW52OmVkd2luMTA1Mg=='
 
-Everyone interacting in the Appprueba project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/appprueba/blob/master/CODE_OF_CONDUCT.md).
+## Future work
+
+Room to improve
+
+- Error handling
+- Field Validations
+- Security
+- Name files
