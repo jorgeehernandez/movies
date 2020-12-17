@@ -26,16 +26,25 @@ module APIRoutes
 
     resource :movies do
       get do
-        movie_list_usecase = MovieList.new(movie_repository)
-        json_movies = movie_list_usecase.list(:query).map { |movie| movie.as_json(:options) }
-        { movies: json_movies }
+        begin
+          movie_list_usecase = MovieList.new(movie_repository)
+          json_movies = movie_list_usecase.list(:query).map { |movie| movie.as_json(:options) }
+          { movies: json_movies }
+        rescue => e
+          { error: e }
+        end
       end
 
       post do
-        movie = Movie.from_json(params)
-        create_movie_usecase = CreateMovie.new(movie_repository, movie_schedule_repository)
-        create_movie_usecase.create(movie)
+        begin
+          movie = Movie.from_json(params)
+          create_movie_usecase = CreateMovie.new(movie_repository, movie_schedule_repository)
+          create_movie_usecase.create(movie)
+        rescue => e
+          { error: e }
+        end
       end
+
     end
 
   end
