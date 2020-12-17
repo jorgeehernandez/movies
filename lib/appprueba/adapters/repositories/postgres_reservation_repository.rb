@@ -16,7 +16,7 @@ class PostgresReservationRepository
   end
 
   def list
-    @reservation_data_source.get_all
+    @reservation_data_source.get_all.map { |reservation| Reservation.new(reservation[:id], reservation[:movie_id], reservation[:date], reservation[:persons]) }
   end
 
   def list_query(date_from, date_to)

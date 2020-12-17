@@ -31,7 +31,7 @@ module APIRoutes
           puts "we have the date #{date_from} and #{date_to}"
           json_reservations = reservation_list_usecase.list_query(Date.parse(date_from), Date.parse(date_to))
         else
-          json_reservations = reservation_list_usecase.list.to_json
+          json_reservations = reservation_list_usecase.list.map { |reservation| reservation.as_json(:options) }
         end
         { reservations: json_reservations }
       end
